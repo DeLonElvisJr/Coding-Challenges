@@ -10,81 +10,98 @@ import java.util.regex.*;
 
 public class Magicsquare {
 
-	public static int[][] Squares(int k) {
-		
-		int[][] s1 = { {8, 1, 6},
-					   {3, 5, 7}, 
-					   {4, 9, 2},
+   public static int[][] Squares(int k) {
+        
+        int[][] s0 = { {8, 1, 6},
+                       {3, 5, 7}, 
+                       {4, 9, 2},
                };
-		int[][] s2 = { {6, 1, 8},
-					   {7, 5, 3}, 
-					   {2, 9, 4},
+        int[][] s1 = { {6, 1, 8},
+                       {7, 5, 3}, 
+                       {2, 9, 4},
                };
-		int[][] s3 = { {4, 9, 2},
-                 	   {3, 5, 7}, 
-                 	   {8, 1, 6},
+        int[][] s2 = { {4, 9, 2},
+                        {3, 5, 7}, 
+                        {8, 1, 6},
                };
-		int[][] s4 = { {2, 9, 4},
-                 	   {7, 5, 3}, 
-                 	   {6, 1, 8},
+        int[][] s3 = { {2, 9, 4},
+                        {7, 5, 3}, 
+                        {6, 1, 8},
                };
-		int[][] s5 = { {8, 3, 4},
-					   {1, 5, 9}, 
-					   {6, 7, 2},
+        int[][] s4 = { {8, 3, 4},
+                       {1, 5, 9}, 
+                       {6, 7, 2},
                };
-		int[][] s6 = { {4, 3, 8},
-                 	   {9, 5, 1}, 
-                 	   {2, 7, 6},
+        int[][] s5 = { {4, 3, 8},
+                        {9, 5, 1}, 
+                        {2, 7, 6},
                };
-		int[][] s7 = { {6, 7, 2},
-					   {1, 5, 9}, 
-					   {8, 3, 4},
+        int[][] s6 = { {6, 7, 2},
+                       {1, 5, 9}, 
+                       {8, 3, 4},
                };
-		int[][] s8 = { {2, 7, 6},
-                 	   {9, 5, 1}, 
-                 	   {4, 3, 8},
+        int[][] s7 = { {2, 7, 6},
+                        {9, 5, 1}, 
+                        {4, 3, 8},
                };
-		switch (k) {
-		
-		case 1: k = 1; return(s1);
-		case 2: k = 2; return(s2);
-		case 3: k = 3; return(s3);
-		case 4: k = 4; return(s4);
-		case 5: k = 5; return(s5);
-		case 6: k = 6; return(s6);
-		case 7: k = 7; return(s7);
-		case 8: k = 8; return(s8);
-		}
-			 return s1;
-		
-	}
-	 // Complete the formingMagicSquare function below.
+               
+        if (k == 0) {
+            return(s0);
+
+        } else if (k == 1) {
+            return(s1);
+
+        } else if (k == 2) {
+            return(s2);
+
+        } else if (k == 3) {
+            return(s3);
+
+        }  else if (k == 4) {   
+            return(s4);
+
+        } else if (k == 5) {
+            return(s5);
+
+        } else if (k == 6) {
+            return(s6);
+
+        } else {
+            return(s7);
+        }
+    }
+     // Complete the formingMagicSquare function below.
     static int formingMagicSquare(int[][] s) {
 
-	    int mincost = 0;
-	    int min;
-	    
-  	for (int k = 0; k < 8; k++ ) {
-  		min = 0;
-  		
-        for (int i = 0; i < 9; i++) {
+        int[][] placeholder = new int[3][3];	// Holds value for the eight matrix's in the square method above
+        int tempmin = 0; 						// Temporary minimum 
+        int mincost = 0; 						// Final minimum returned 
+        int var = 0; 							// Stores value of calculation for the converting the magic square
 
-            for (int j = 0; j < 9; j++) {
-  
-                if (s[i][j] == Squares(k)[i][j]) {
+            for (int i = 0; i < 8; i++) {
 
-                	min++;
+                tempmin = 0;
+                placeholder = Squares(i);		// Places value of a magic square into placeholder
+
+                for (int j = 0; j < 3; j++) {
+
+                    for (int k = 0; k < 3; k++) {
+
+                        if (s[j][k] != placeholder[j][k]) {
+                            
+                            var = Math.abs(placeholder[j][k] - s[j][k]);
+                            tempmin = tempmin + var;
+                        }
+                    }
                 }
-            }  
-        }
-        			if (min < mincost) {
-        				
-        				mincost = min;
-        			}
-  	}    
-        
-        
-        
+                    if (i == 0) {
+                        mincost = tempmin;
+
+                    } else if (tempmin < mincost) {
+                        mincost = tempmin;
+                    }
+            }
+
             return (mincost);
     }
 
