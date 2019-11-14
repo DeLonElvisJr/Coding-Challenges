@@ -10,6 +10,7 @@ import java.util.regex.*;
 
 public class Magicsquare {
 
+	// Stores magic squares and returns them depending on index
    public static int[][] Squares(int k) {
         
         int[][] s0 = { {8, 1, 6},
@@ -70,31 +71,32 @@ public class Magicsquare {
             return(s7);
         }
     }
+   
      // Complete the formingMagicSquare function below.
     static int formingMagicSquare(int[][] s) {
 
-        int[][] placeholder = new int[3][3];	// Holds value for the eight matrix's in the square method above
-        int tempmin = 0; 						// Temporary minimum 
-        int mincost = 0; 						// Final minimum returned 
-        int var = 0; 							// Stores value of calculation for the converting the magic square
+        int[][] placeholder = new int[3][3];										// Holds value for the eight matrix's in the square method above
+        int tempmin = 0; 															// Temporary minimum 
+        int mincost = 0; 															// Final minimum returned 
+        int var = 0; 																// Stores value of calculation for the converting the magic square
 
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 8; i++) { 											// Loops through the 8 matrix's  
 
                 tempmin = 0;
-                placeholder = Squares(i);		// Places value of a magic square into placeholder
+                placeholder = Squares(i);											// Places value of a magic square into placeholder
 
-                for (int j = 0; j < 3; j++) {
+                for (int j = 0; j < 3; j++) {										// Loops through the columns  
 
-                    for (int k = 0; k < 3; k++) {
+                    for (int k = 0; k < 3; k++) {									// Loops through the rows
 
-                        if (s[j][k] != placeholder[j][k]) {
+                        if (s[j][k] != placeholder[j][k]) {							// When the index of matrix s is not equal to the matrix currently being referenced 
                             
-                            var = Math.abs(placeholder[j][k] - s[j][k]);
-                            tempmin = tempmin + var;
+                            var = Math.abs(placeholder[j][k] - s[j][k]); 			// Calculate cost of the operation 
+                            tempmin = tempmin + var;								// Adding each value that has to be switched 
                         }
                     }
                 }
-                    if (i == 0) {
+                    if (i == 0) {													// If else places the min cost of a matrix's with the least swaps 
                         mincost = tempmin;
 
                     } else if (tempmin < mincost) {
