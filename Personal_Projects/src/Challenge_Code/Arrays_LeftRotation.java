@@ -1,35 +1,37 @@
 package Challenge_Code;
 
 import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
 import java.util.*;
-
+import java.util.concurrent.*;
+import java.util.regex.*;
 
 public class Arrays_LeftRotation {
+
+    static int[] leftrotbyOne(int[] a, int n) {
+
+        int temp;
+        temp = a[0];
+
+            for (int i = 0; i < n - 1; i++) {
+
+                a[i] = a[i + 1];
+            }
+                a[n-1] = temp;
+
+        return(a);
+    }
 
     // Complete the rotLeft function below.
     static int[] rotLeft(int[] a, int d) {
 
-        int temp = 0; 
-        
-        for (int j = 0; j < d; j++) {							//Number of left rotations d
-            for (int i = a.length -1; i >= 0; i--) {			//Rotation of matrix a
+      for (int i = 0; i < d; i++) {
 
-                if (i == a.length - 1) {						//If the loop is currently at index a[n] the max index
-                    temp = a[i-1]; 
-                    a[i-1] = a[i]; 
-
-                } else if (i == 0) {							//If the loop is at the last element n - (n-1)
-                	a[a.length - 1] = temp;
-
-                } else {										//All other cases between the two other statements 
-                    a[a.length - 1] = temp;
-                    temp = a[i-1]; 
-                    a[i-1] = a[a.length - 1];
-                }
-            }
-        }
-        
-        return(a); 
+          leftrotbyOne(a, a.length);
+      }
+        return(a);
     }
 
     private static final Scanner scanner = new Scanner(System.in);
